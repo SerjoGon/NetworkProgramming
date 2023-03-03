@@ -5,9 +5,13 @@ VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetWorkProrgLess1", "NetWorkProrgLess1\NetWorkProrgLess1.csproj", "{0B2C7BA4-A5B1-4AF0-928E-1133A6F4F734}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NPLessonServer", "NPLessonServer\NPLessonServer.csproj", "{02F18CD3-FBB2-457E-98F8-B9A36A46AD1F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NPLessonServer", "NPLessonServer\NPLessonServer.csproj", "{02F18CD3-FBB2-457E-98F8-B9A36A46AD1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NPLesson1client", "NPLesson1client\NPLesson1client.csproj", "{931B5AC9-05D7-4E2A-B399-FD3CACBE40C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NPLesson1client", "NPLesson1client\NPLesson1client.csproj", "{931B5AC9-05D7-4E2A-B399-FD3CACBE40C2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NP_less2", "NP_less2\NP_less2.csproj", "{EA79ECFA-5B5E-4C81-9CB0-39320C486887}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NP_less2_server", "NP_less2_server\NP_less2_server.csproj", "{EE60029D-FDDD-41AC-807D-05AFDC1DDD1F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,14 @@ Global
 		{931B5AC9-05D7-4E2A-B399-FD3CACBE40C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{931B5AC9-05D7-4E2A-B399-FD3CACBE40C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{931B5AC9-05D7-4E2A-B399-FD3CACBE40C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA79ECFA-5B5E-4C81-9CB0-39320C486887}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA79ECFA-5B5E-4C81-9CB0-39320C486887}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA79ECFA-5B5E-4C81-9CB0-39320C486887}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA79ECFA-5B5E-4C81-9CB0-39320C486887}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE60029D-FDDD-41AC-807D-05AFDC1DDD1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE60029D-FDDD-41AC-807D-05AFDC1DDD1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE60029D-FDDD-41AC-807D-05AFDC1DDD1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE60029D-FDDD-41AC-807D-05AFDC1DDD1F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
