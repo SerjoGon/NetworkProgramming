@@ -6,8 +6,8 @@ namespace NP_less2_server
 {
     public partial class Form1 : Form
     {
-        Socket? server;
-        IPEndPoint? point;
+        Socket server;
+        IPEndPoint point;
         public Form1()
         {
             InitializeComponent();
@@ -21,41 +21,51 @@ namespace NP_less2_server
 
         private void btn_start_Click(object sender, EventArgs e)
         {
+            if (server == null)
+                return;
+            server.Bind(point);
+            server.Listen(100);
+            tmr_refreshconnection.Start();
+        }
+
+        private void btnstop_Click(object sender, EventArgs e)
+        {
+            tmr_refreshconnection.Stop();
+            /*server.Shutdown(SocketShutdown.Both);
+            server.Close();*/
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            server.Close();
+        }
+        private void tmr_refreshConnection_Tick(object sender, EventArgs e)
+        {
             try
             {
-                server.Bind(point);
-                server.Listen(100);
-                server.BeginAccept(
-                    (IAsyncResult result) =>
-                {
-                    if (result != null)
-                    {
-                        Socket clientsocket = server.EndAccept(result);
-                        rtb_clients.Text += clientsocket.RemoteEndPoint.ToString();
-                        clientsocket.Send(Encoding.UTF8.GetBytes("Успешное подключение."));
-                    }
-                }, server);
+                server.BeginAccept(ServerAcceptDelegate, server);
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            /*
-             rtb_clients.Text += client.RemoteEndPoint.ToString();
-            ArraySegment<byte> buffer = new ArraySegment<byte>(Encoding.UTF8.GetBytes("Успешное подключение."));
-            client.SendAsync(buffer, SocketFlags.None);
-            */
         }
-
-        private void btnstop_Click(object sender, EventArgs e)
+        private void ServerAcceptDelegate(IAsyncResult result)
         {
-            server.Shutdown(SocketShutdown.Both);
-            server.Close();
+            if (result != null)
+            {
+                Socket serv = (Socket)result.AsyncState;
+                Socket clientsocket = serv.EndAccept(result);
+                clientsocket.Send(Encoding.UTF8.GetBytes("Успешное подключение."));
+                clientsocket.Shutdown(SocketShutdown.Send);
+                clientsocket.Close();
+                serv.BeginAccept(ServerAcceptDelegate, serv);
+            }
         }
-
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        void RichTextBoxDelegate(object obj, EventArgs e)
         {
-
+            rtb_clients.Text +=(string) obj;
         }
     }
 }

@@ -19,17 +19,20 @@ namespace NP_less2
             {
                 client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
                 point = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 80);
-                client.BeginConnect(point,(IAsyncResult result)=>
-                {
-                    client.EndConnect();
-                });
-                byte[] buffer = new byte[1024];
-                int answerServer = client.Receive(buffer);
-                while(answerServer > 0)
-                {
-                    rtb_chat.Text = Encoding.UTF8.GetString(buffer);
-                    answerServer = client.Receive(buffer);
-                }
+                client.BeginConnect(point, (IAsyncResult result) => {
+                    Socket clientAsync = (Socket)result.AsyncState;
+                    if (clientAsync.Connected)
+                    {
+                        byte[] buffer = new byte[1024];
+                        int answerServer = client.Receive(buffer);
+                        while (answerServer > 0)
+                        {
+                            rtb_chat.Text += Encoding.UTF8.GetString(buffer);
+                            answerServer = client.Receive(buffer);
+                        }
+                    }
+                    client.EndConnect(result);
+                }, client);
             }
             catch (Exception ex)
             {

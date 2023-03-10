@@ -68,6 +68,7 @@
             this.tb_message.Name = "tb_message";
             this.tb_message.Size = new System.Drawing.Size(800, 23);
             this.tb_message.TabIndex = 4;
+            this.tb_message.TextChanged += new System.EventHandler(this.tb_message_TextChanged);
             // 
             // btn_sendmsg
             // 
