@@ -6,11 +6,12 @@ namespace NP_less2
 {
     public partial class Form1 : Form
     {
-        Socket? client;
-        IPEndPoint? point;
+        Socket client;
+        IPEndPoint point;
         public Form1()
         {
             InitializeComponent();
+
         }
 
         private void btn_connection_Click(object sender, EventArgs e)
@@ -19,7 +20,8 @@ namespace NP_less2
             {
                 client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
                 point = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 80);
-                client.BeginConnect(point, (IAsyncResult result) => {
+                client.BeginConnect(point, (IAsyncResult result) =>
+                {
                     Socket clientAsync = (Socket)result.AsyncState;
                     if (clientAsync.Connected)
                     {
@@ -43,7 +45,9 @@ namespace NP_less2
 
         private void btn_sendmsg_Click(object sender, EventArgs e)
         {
-
+            byte[] buffer = Encoding.UTF8.GetBytes(tb_message.Text);
+            ArraySegment<byte> segment = new ArraySegment<byte>(buffer, 0, buffer.Length);
+            client.SendAsync(segment, SocketFlags.None);
         }
 
         private void btn_choos_Click(object sender, EventArgs e)
@@ -61,6 +65,11 @@ namespace NP_less2
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+        }
+
+        private void tb_message_TextChanged(object sender, EventArgs e)
         {
 
         }

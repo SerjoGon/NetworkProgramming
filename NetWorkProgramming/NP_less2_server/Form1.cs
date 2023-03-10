@@ -57,6 +57,7 @@ namespace NP_less2_server
             {
                 Socket serv = (Socket)result.AsyncState;
                 Socket clientsocket = serv.EndAccept(result);
+                IAsyncResult updateText = rtb_clients.BeginInvoke(RichTextBoxDelegate);
                 clientsocket.Send(Encoding.UTF8.GetBytes("Успешное подключение."));
                 clientsocket.Shutdown(SocketShutdown.Send);
                 clientsocket.Close();
