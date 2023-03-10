@@ -8,7 +8,6 @@ namespace NP_less2_server
     {
         Socket? server;
         IPEndPoint? point;
-        bool runServer;
         public Form1()
         {
             InitializeComponent();
@@ -26,28 +25,37 @@ namespace NP_less2_server
             {
                 server.Bind(point);
                 server.Listen(100);
-                server.BeginAccept((IAsyncResult result) =>
+                server.BeginAccept(
+                    (IAsyncResult result) =>
                 {
-                    Socket clientsocket = server.EndAccept(result);
-                    rtb_clients.Text += clientsocket.RemoteEndPoint.ToString();
-                    clientsocket.Send(Encoding.UTF8.GetBytes("Успешное подключение."));
+                    if (result != null)
+                    {
+                        Socket clientsocket = server.EndAccept(result);
+                        rtb_clients.Text += clientsocket.RemoteEndPoint.ToString();
+                        clientsocket.Send(Encoding.UTF8.GetBytes("Успешное подключение."));
+                    }
                 }, server);
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-                /*
-                 rtb_clients.Text += client.RemoteEndPoint.ToString();
-                ArraySegment<byte> buffer = new ArraySegment<byte>(Encoding.UTF8.GetBytes("Успешное подключение."));
-                client.SendAsync(buffer, SocketFlags.None);
-                */
+            /*
+             rtb_clients.Text += client.RemoteEndPoint.ToString();
+            ArraySegment<byte> buffer = new ArraySegment<byte>(Encoding.UTF8.GetBytes("Успешное подключение."));
+            client.SendAsync(buffer, SocketFlags.None);
+            */
         }
 
         private void btnstop_Click(object sender, EventArgs e)
         {
             server.Shutdown(SocketShutdown.Both);
             server.Close();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
         }
     }
 }
