@@ -1,6 +1,7 @@
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using Contacts;
 
 namespace NP_less2_server
 {
@@ -8,6 +9,7 @@ namespace NP_less2_server
     {
         Socket server;
         IPEndPoint point;
+        ClientContacts contacts;
         public ServerForm()
         {
             InitializeComponent();

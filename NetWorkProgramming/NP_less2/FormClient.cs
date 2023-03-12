@@ -1,6 +1,7 @@
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using Contacts;
 
 namespace NP_less2
 {
@@ -8,6 +9,8 @@ namespace NP_less2
     {
         Socket client;
         IPEndPoint point;
+        ClientContacts Contacts = new ClientContacts(new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP),
+            "Serj","password123","www.uncleserjy@yandex.ru","+79896667649");
         public FormClient()
         {
             InitializeComponent();
@@ -18,7 +21,7 @@ namespace NP_less2
         {
             try
             {
-                client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP);
+                client = Contacts.Socket;
                 point = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 80);
                 client.BeginConnect(point, (IAsyncResult result) =>
                 {
@@ -71,6 +74,11 @@ namespace NP_less2
 
         private void tb_message_TextChanged(object sender, EventArgs e)
         {
+
+        }
+        class Client
+        {
+            Socket _clientSocket;
 
         }
     }
