@@ -4,11 +4,11 @@ using System.Text;
 
 namespace NP_less2_server
 {
-    public partial class Form1 : Form
+    public partial class ServerForm : Form
     {
         Socket server;
         IPEndPoint point;
-        public Form1()
+        public ServerForm()
         {
             InitializeComponent();
         }

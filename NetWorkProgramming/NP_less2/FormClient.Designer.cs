@@ -1,6 +1,6 @@
 ﻿namespace NP_less2
 {
-    partial class Form1
+    partial class FormClient
     {
         /// <summary>
         ///  Required designer variable.
