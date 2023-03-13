@@ -2,6 +2,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using Contacts;
+using ClientCommand;
 
 namespace NP_less2
 {
@@ -9,8 +10,8 @@ namespace NP_less2
     {
         Socket client;
         IPEndPoint point;
-        ClientContacts Contacts = new ClientContacts(new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP),
-            "Serj","password123","www.uncleserjy@yandex.ru","+79896667649");
+        ClientContacts Contacts;
+        ClientServerCommand command;
         public FormClient()
         {
             InitializeComponent();
@@ -21,23 +22,11 @@ namespace NP_less2
         {
             try
             {
-                client = Contacts.Socket;
-                point = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 80);
-                client.BeginConnect(point, (IAsyncResult result) =>
-                {
-                    Socket clientAsync = (Socket)result.AsyncState;
-                    if (clientAsync.Connected)
-                    {
-                        byte[] buffer = new byte[1024];
-                        int answerServer = client.Receive(buffer);
-                        while (answerServer > 0)
-                        {
-                            rtb_chat.Text += Encoding.UTF8.GetString(buffer);
-                            answerServer = client.Receive(buffer);
-                        }
-                    }
-                    client.EndConnect(result);
-                }, client);
+                command.ConnectServer(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 80), Contacts.Socket);
+                Thread thread = Thread.CurrentThread;
+                thread.Join(500);
+                if (command.ServerIsConnected())
+                    rtb_chat.Text = "Подключение успешно!\n";
             }
             catch (Exception ex)
             {
@@ -48,14 +37,17 @@ namespace NP_less2
 
         private void btn_sendmsg_Click(object sender, EventArgs e)
         {
-            byte[] buffer = Encoding.UTF8.GetBytes(tb_message.Text);
-            ArraySegment<byte> segment = new ArraySegment<byte>(buffer, 0, buffer.Length);
-            client.SendAsync(segment, SocketFlags.None);
+            if (command.ServerIsConnected())
+                command.SendMessage("Contact|" + Contacts.ToString());
         }
 
         private void btn_choos_Click(object sender, EventArgs e)
         {
 
+        }
+        void RichTextBoxOutputDelegate(object obj)
+        {
+            rtb_chat.Text += (string)obj;
         }
 
         private void btn_closeconnection_Click(object sender, EventArgs e)
@@ -76,10 +68,13 @@ namespace NP_less2
         {
 
         }
-        class Client
-        {
-            Socket _clientSocket;
+        
 
+        private void FormClient_Load(object sender, EventArgs e)
+        {
+            Contacts = new ClientContacts(new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.IP),
+            "Serj", "password123", "www.uncleserjy@yandex.ru", "+79896667649");
+            command = new ClientServerCommand();
         }
     }
 }

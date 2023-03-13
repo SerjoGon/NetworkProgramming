@@ -1,7 +1,8 @@
-using System.Net;
+п»їusing System.Net;
 using System.Net.Sockets;
 using System.Text;
 using Contacts;
+using ServerCommand;
 
 namespace NP_less2_server
 {
@@ -9,7 +10,8 @@ namespace NP_less2_server
     {
         Socket server;
         IPEndPoint point;
-        ClientContacts contacts;
+        ServerClientCommand command = new ServerClientCommand();
+
         public ServerForm()
         {
             InitializeComponent();
@@ -32,43 +34,59 @@ namespace NP_less2_server
 
         private void btnstop_Click(object sender, EventArgs e)
         {
-            tmr_refreshconnection.Stop();
-            /*server.Shutdown(SocketShutdown.Both);
-            server.Close();*/
-        }
-
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            server.Close();
-        }
-        private void tmr_refreshConnection_Tick(object sender, EventArgs e)
-        {
             try
             {
-                server.BeginAccept(ServerAcceptDelegate, server);
-
+                if (server != null)
+                    tmr_refreshconnection.Stop();
+                server.Close();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
-        private void ServerAcceptDelegate(IAsyncResult result)
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (result != null)
+            try
             {
-                Socket serv = (Socket)result.AsyncState;
-                Socket clientsocket = serv.EndAccept(result);
-                IAsyncResult updateText = rtb_clients.BeginInvoke(RichTextBoxDelegate);
-                clientsocket.Send(Encoding.UTF8.GetBytes("Успешное подключение."));
-                clientsocket.Shutdown(SocketShutdown.Send);
-                clientsocket.Close();
-                serv.BeginAccept(ServerAcceptDelegate, serv);
+                server.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
-        void RichTextBoxDelegate(object obj, EventArgs e)
+        private void tmr_refreshConnection_Tick(object sender, EventArgs e)
         {
-            rtb_clients.Text +=(string) obj;
+            if(command.GetClientSocket(server))
+            {
+                if(command.clientSockets.Count >0)
+                {
+                    foreach(Socket client in command.clientSockets) 
+                    {
+                        command.CommandManage(command.ReciveMessage(client), client);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show(command._eror);
+            }
         }
+
+        void RichTextBoxOutputDelegate(object obj)
+        {
+            rtb_clients.Text += (string)obj;
+        }
+
+        private void btn_updateClientsList_Click(object sender, EventArgs e)
+        {
+            foreach (ClientContacts client in command.contacts)
+            {
+                rtb_clients.Text += client.ToString();
+            }
+        }
+        
     }
 }

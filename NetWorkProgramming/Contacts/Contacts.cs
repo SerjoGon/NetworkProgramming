@@ -17,5 +17,13 @@ namespace Contacts
             _email = email;
             _phone = phone;
         }
+        public string SendToNetwork()
+        {
+            return " " + Name + "|" + _email + "|" + _password + "|" + _phone + "\n";
+        }
+        public override string ToString()
+        {
+            return " " + Name + " " + _email + " " + _password + " " + _phone +"\n";
+        }
     }
 }
