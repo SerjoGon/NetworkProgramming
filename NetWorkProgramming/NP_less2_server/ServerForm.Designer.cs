@@ -81,7 +81,7 @@
             // 
             // tmr_refreshconnection
             // 
-            this.tmr_refreshconnection.Interval = 3000;
+            this.tmr_refreshconnection.Interval = 1000;
             this.tmr_refreshconnection.Tick += new System.EventHandler(this.tmr_refreshConnection_Tick);
             // 
             // rtb_clients

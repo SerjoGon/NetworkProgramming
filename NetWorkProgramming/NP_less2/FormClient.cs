@@ -22,11 +22,11 @@ namespace NP_less2
         {
             try
             {
-                command.ConnectServer(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 80), Contacts.Socket);
+                command.ConnectServer(new IPEndPoint(IPAddress.Parse("192.168.150.12"), 80), Contacts.Socket);
                 Thread thread = Thread.CurrentThread;
                 thread.Join(500);
                 if (command.ServerIsConnected())
-                    rtb_chat.Text = "Подключение успешно!\n";
+                    rtb_chat.Text += command._answer +"\n";
             }
             catch (Exception ex)
             {

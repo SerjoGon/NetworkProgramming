@@ -9,8 +9,8 @@ namespace ClientCommand
         Socket client { get; set; }
         Socket server { get; set; }
 
-        string _answer = "";
-        string _eror = "";
+        public string _answer = "";
+        public string _eror = "";
         public bool ConnectServer(IPEndPoint point, Socket clientSocket)
         {
             try
@@ -23,11 +23,11 @@ namespace ClientCommand
                     {
 
                         byte[] buffer = new byte[1024];
-                        int answerServer = server.Receive(buffer);
-                        while (answerServer > 0)
+                        ArraySegment<byte> segment = new ArraySegment<byte>(buffer,0,buffer.Length);
+                        Task<int> message = server.ReceiveAsync(segment,SocketFlags.None);
+                        if(message.IsCompleted)
                         {
                             _answer += Encoding.UTF8.GetString(buffer);
-                            answerServer = server.Receive(buffer);
                         }
                     }
                 }, client);
