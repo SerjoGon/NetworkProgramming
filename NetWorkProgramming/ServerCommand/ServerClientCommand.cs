@@ -31,10 +31,18 @@ namespace ServerCommand
                 {
                     Socket clientsocket = serv.EndAccept(result);
                     clientSockets.Add(clientsocket);
-                    clientsocket.Send(Encoding.UTF8.GetBytes("Успешное подключение!"));
+                    byte[] buffer = Encoding.UTF8.GetBytes("Успешное подключение!servclientcomm");
+                    ArraySegment<byte> segment = new ArraySegment<byte>(buffer, 0, buffer.Length);
+                    clientsocket.BeginSend(buffer, 0, buffer.Length, SocketFlags.None, SendMessageDelegate, clientsocket);
+                    //clientsocket.SendAsync(segment, SocketFlags.None);
 
                 }
             }
+        }
+        void SendMessageDelegate(IAsyncResult result) 
+        {
+            Socket client = (Socket)result.AsyncState;
+            client.EndSend(result);
         }
         public string ReciveMessage(Socket client)
         {
@@ -44,24 +52,16 @@ namespace ServerCommand
             Task<int> answer = client.ReceiveAsync(segment, SocketFlags.None);
             if (answer.IsCompleted)
             {
-                text = Encoding.UTF8.GetString(segment);
-                /*
-
-                */
+                text = Encoding.UTF8.GetString(segment.ToArray());
             }
             return text;
         }
         public void CommandManage(string text, Socket client)
         {
             if (text.StartsWith("Contact"))
-            {
                 AddNewContact(text.Split('|'), client);
-            }
         }
 
-        void AddNewContact(string[] data, Socket client)
-        {
-            contacts.Add(new ClientContacts(client, data[1], data[3], data[2], data[4]));
-        }
+        void AddNewContact(string[] data, Socket client) => contacts.Add(new ClientContacts(client, data[1], data[3], data[2], data[4]));
     }
 }

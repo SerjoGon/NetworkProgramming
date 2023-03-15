@@ -18,15 +18,13 @@ namespace NP_less2
 
         }
 
-        private void btn_connection_Click(object sender, EventArgs e)
+        private async void btn_connection_Click(object sender, EventArgs e)
         {
             try
             {
-                command.ConnectServer(new IPEndPoint(IPAddress.Parse("192.168.150.12"), 80), Contacts.Socket);
-                Thread thread = Thread.CurrentThread;
-                thread.Join(500);
-                if (command.ServerIsConnected())
-                    rtb_chat.Text += command._answer +"\n";
+                await command.ConnectServer(new IPEndPoint(IPAddress.Parse("127.0.0.1"), 80), Contacts.Socket);
+                 rtb_chat.Text += command._answer + "\n";
+                
             }
             catch (Exception ex)
             {
@@ -61,14 +59,15 @@ namespace NP_less2
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-
+            if(command.client.Connected)
+                command.client.Disconnect(false);
         }
 
         private void tb_message_TextChanged(object sender, EventArgs e)
         {
 
         }
-        
+
 
         private void FormClient_Load(object sender, EventArgs e)
         {

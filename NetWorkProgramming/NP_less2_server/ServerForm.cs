@@ -25,11 +25,28 @@ namespace NP_less2_server
 
         private void btn_start_Click(object sender, EventArgs e)
         {
-            if (server == null)
-                return;
-            server.Bind(point);
-            server.Listen(100);
-            tmr_refreshconnection.Start();
+            if (server != null)
+            {
+                server.Bind(point);
+                server.Listen(100);
+                tmr_refreshconnection.Start();
+            }
+            if (command.GetClientSocket(server))
+            {
+                if (command.clientSockets.Count > 0)
+                {
+                    foreach (Socket client in command.clientSockets)
+                    {
+                        string message = command.ReciveMessage(client);
+                        rtb_clients.Text += message + "\n";
+                        command.CommandManage(command.ReciveMessage(client), client);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show(command._eror);
+            }
         }
 
         private void btnstop_Click(object sender, EventArgs e)
@@ -59,7 +76,7 @@ namespace NP_less2_server
         }
         private void tmr_refreshConnection_Tick(object sender, EventArgs e)
         {
-            if(command.GetClientSocket(server))
+           /* if(command.GetClientSocket(server))
             {
                 if(command.clientSockets.Count >0)
                 {
@@ -72,7 +89,7 @@ namespace NP_less2_server
             else
             {
                 MessageBox.Show(command._eror);
-            }
+            }*/
         }
 
         void RichTextBoxOutputDelegate(object obj)
