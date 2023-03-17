@@ -21,7 +21,6 @@ namespace WF_HTTP_client
             StreamReader reader = new StreamReader(stream);
             richTextBox1.Text= reader.ReadToEnd();
 
-
             /*
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(site);
