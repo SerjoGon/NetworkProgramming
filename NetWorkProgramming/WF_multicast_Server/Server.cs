@@ -18,6 +18,8 @@ namespace WF_multicast_Server
         public Server()
         {
             InitializeComponent();
+            sender.IsBackground= true;
+            sender.Start();
         }
         static string message = "";
         Thread sender = new Thread(new ThreadStart(Sender));

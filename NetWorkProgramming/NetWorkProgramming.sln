@@ -23,6 +23,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WF_Multicast", "WF_Multicas
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WF_multicast_Server", "WF_multicast_Server\WF_multicast_Server.csproj", "{C4711761-5AC5-43EC-93EE-72C39A78E0B6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDPclient", "UDPclient\UDPclient.csproj", "{FE4842DF-EB52-49F0-BCB0-0A9DC25FE3D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WF_HTTP_client", "WF_HTTP_client\WF_HTTP_client.csproj", "{92C668B8-9EB0-4E40-8F10-7A7BA8518FCA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +73,14 @@ Global
 		{C4711761-5AC5-43EC-93EE-72C39A78E0B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4711761-5AC5-43EC-93EE-72C39A78E0B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4711761-5AC5-43EC-93EE-72C39A78E0B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE4842DF-EB52-49F0-BCB0-0A9DC25FE3D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE4842DF-EB52-49F0-BCB0-0A9DC25FE3D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE4842DF-EB52-49F0-BCB0-0A9DC25FE3D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE4842DF-EB52-49F0-BCB0-0A9DC25FE3D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92C668B8-9EB0-4E40-8F10-7A7BA8518FCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92C668B8-9EB0-4E40-8F10-7A7BA8518FCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92C668B8-9EB0-4E40-8F10-7A7BA8518FCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92C668B8-9EB0-4E40-8F10-7A7BA8518FCA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
