@@ -23,9 +23,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WF_Multicast", "WF_Multicas
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WF_multicast_Server", "WF_multicast_Server\WF_multicast_Server.csproj", "{C4711761-5AC5-43EC-93EE-72C39A78E0B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UDPclient", "UDPclient\UDPclient.csproj", "{FE4842DF-EB52-49F0-BCB0-0A9DC25FE3D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UDPclient", "UDPclient\UDPclient.csproj", "{FE4842DF-EB52-49F0-BCB0-0A9DC25FE3D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WF_HTTP_client", "WF_HTTP_client\WF_HTTP_client.csproj", "{92C668B8-9EB0-4E40-8F10-7A7BA8518FCA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WF_HTTP_client", "WF_HTTP_client\WF_HTTP_client.csproj", "{92C668B8-9EB0-4E40-8F10-7A7BA8518FCA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HW_MOD3CurrencyServer", "HW_MOD3CurrencyServer\HW_MOD3CurrencyServer.csproj", "{46FEC073-53BC-4402-9C8D-CCA45BE8280F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HW_MOD3CurrencyClient", "HW_MOD3CurrencyClient\HW_MOD3CurrencyClient.csproj", "{3890EDCF-AE2C-4197-8B54-E443D5DE58E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +85,14 @@ Global
 		{92C668B8-9EB0-4E40-8F10-7A7BA8518FCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92C668B8-9EB0-4E40-8F10-7A7BA8518FCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92C668B8-9EB0-4E40-8F10-7A7BA8518FCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46FEC073-53BC-4402-9C8D-CCA45BE8280F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46FEC073-53BC-4402-9C8D-CCA45BE8280F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46FEC073-53BC-4402-9C8D-CCA45BE8280F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46FEC073-53BC-4402-9C8D-CCA45BE8280F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3890EDCF-AE2C-4197-8B54-E443D5DE58E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3890EDCF-AE2C-4197-8B54-E443D5DE58E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3890EDCF-AE2C-4197-8B54-E443D5DE58E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3890EDCF-AE2C-4197-8B54-E443D5DE58E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
